@@ -5,16 +5,6 @@
 #endif
 #include "hiredis_ext.h"
 
-#ifdef _WIN32
-#define close closesocket
-#define SETERRNO errnox = WSAGetLastError()
-#undef errno
-int errnox = EINPROGRESS;
-#define errno errnox
-#else
-#define SETERRNO
-#endif
-
 typedef struct redisParentContext {
     redisContext *context;
     struct timeval *timeout;
