@@ -1,4 +1,4 @@
-#include "config.h"
+#include "./../../vendor/hiredis/config.h"
 #ifndef _WIN32
 #include <sys/socket.h>
 #include <errno.h>
