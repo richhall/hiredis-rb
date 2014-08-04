@@ -1,3 +1,4 @@
 [submodule "vendor/hiredis"]
 	path = vendor/hiredis
-	url = https://github.com/redis/hiredis.git
+	url = https://github.com/richhall/hiredis.git
+	branch = master
