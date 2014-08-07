@@ -1,4 +1,5 @@
-require 'mkmf'
+ documents
+ require 'mkmf'
 
 RbConfig::MAKEFILE_CONFIG['CC'] = ENV['CC'] if ENV['CC']
 
@@ -12,7 +13,7 @@ RbConfig::CONFIG['configure_args'] =~ /with-make-prog\=(\w+)/
 make_program = $1 || ENV['make']
 make_program ||= case RUBY_PLATFORM
 when /mswin/
-  'nmake'
+  'make'
 when /(bsd|solaris)/
   'gmake'
 else
