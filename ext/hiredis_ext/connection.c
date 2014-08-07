@@ -264,29 +264,6 @@ static VALUE connection_connect(int argc, VALUE *argv, VALUE self) {
     return connection_generic_connect(self,c,arg_timeout);
 }
 
-static VALUE connection_connect_unix(int argc, VALUE *argv, VALUE self) {
-    redisContext *c;
-    VALUE arg_path = Qnil;
-    VALUE arg_timeout = Qnil;
-
-    if (argc == 1 || argc == 2) {
-        arg_path = argv[0];
-
-        if (argc == 2) {
-            arg_timeout = argv[1];
-
-            /* Sanity check */
-            if (NUM2INT(arg_timeout) <= 0) {
-                rb_raise(rb_eArgError, "timeout should be positive");
-            }
-        }
-    } else {
-        rb_raise(rb_eArgError, "invalid number of arguments");
-    }
-
-    c = redisConnectUnixNonBlock(StringValuePtr(arg_path));
-    return connection_generic_connect(self,c,arg_timeout);
-}
 
 static VALUE connection_is_connected(VALUE self) {
     redisParentContext *pc;
@@ -505,7 +482,7 @@ void InitConnection(VALUE mod) {
     rb_global_variable(&klass_connection);
     rb_define_alloc_func(klass_connection, connection_parent_context_alloc);
     rb_define_method(klass_connection, "connect", connection_connect, -1);
-    rb_define_method(klass_connection, "connect_unix", connection_connect_unix, -1);
+   // rb_define_method(klass_connection, "connect_unix", connection_connect_unix, -1);
     rb_define_method(klass_connection, "connected?", connection_is_connected, 0);
     rb_define_method(klass_connection, "disconnect", connection_disconnect, 0);
     rb_define_method(klass_connection, "timeout=", connection_set_timeout, 1);
